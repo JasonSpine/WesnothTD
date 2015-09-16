@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Towers\Cash.cs">
     <Files>
-      <File FileName="Assets\Code\Towers\TowerButtonController.cs" Line="12" Column="3" />
+      <File FileName="Assets\Code\Towers\TowerButtonController.cs" Line="24" Column="35" />
       <File FileName="Assets\Code\Towers\Cash.cs" Line="67" Column="72" />
+      <File FileName="Assets\Code\Towers\DescriptionController.cs" Line="12" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

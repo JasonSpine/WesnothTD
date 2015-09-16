@@ -1,0 +1,12 @@
+from sdl-ball game dio sound theme (GPLv3):
+	doom-brick-break.ogg
+
+from sdl-ball default sound theme:
+	cement-brick-hit.ogg
+	
+from wesnoth forum (not used in official game):
+	doug_kaufman-music_score.ogg (dpkaufman@gmail.com)
+
+License: http://creativecommons.org/licenses/sampling+/1.0/:
+	36847__EcoDTR__LaserRocket2.ogg ( by EcoDTR: http://www.freesound.org/samplesViewSingle.php?id=36847 )
+	32954__HardPCM__Chip054.ogg ( by HardPCM: http://www.freesound.org/samplesViewSingle.php?id=32954 )
