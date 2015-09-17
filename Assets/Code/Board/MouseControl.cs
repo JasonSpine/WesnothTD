@@ -2,11 +2,14 @@
 using System.Collections;
 
 public class MouseControl : MonoBehaviour {
+	public RectTransform _RectTransform;
+	public float BoundarySize = 20.0f;
+
 	Vector3 LastMousePos;
 	bool Clicked = false;
 	// Use this for initialization
 	void Start () {
-	
+		_RectTransform.anchoredPosition = new Vector2(BoundarySize, -BoundarySize);
 	}
 	
 	// Update is called once per frame
@@ -19,7 +22,19 @@ public class MouseControl : MonoBehaviour {
 				} else {
 					Vector2 MouseShift = (Vector2)(Input.mousePosition - LastMousePos);
 
-					transform.localPosition += (Vector3)MouseShift;
+					Vector2 NewPos = MouseShift + _RectTransform.anchoredPosition;
+
+					if (NewPos.x < BoundarySize) {
+						NewPos.x = BoundarySize;
+					}
+
+					if (NewPos.y > -BoundarySize) {
+						NewPos.y = -BoundarySize;
+					}
+
+					_RectTransform.anchoredPosition = NewPos;
+
+
 
 					LastMousePos = Input.mousePosition;
 				}
