@@ -51,6 +51,7 @@
      <Compile Include="Assets\Code\Towers\Cash.cs" />
      <Compile Include="Assets\Code\Towers\DescriptionController.cs" />
      <Compile Include="Assets\Code\Towers\TowerButtonController.cs" />
+     <Compile Include="Assets\Code\Victims\PathNode.cs" />
      <Compile Include="Assets\Code\Victims\VictimPath.cs" />
      <None Include="Assets\Fonts\www.fontsquirrel.com\League-Gothic\SIL Open Font License.txt" />
      <None Include="Assets\Sounds\credits.txt" />
