@@ -3,7 +3,7 @@ using System.Collections;
 
 using UnityEngine.UI;
 
-public class TowerOnBoardController : MonoBehaviour {
+public class TowerController : MonoBehaviour {
 	[Header("Animation")]
 	public Image TowerImage;
 	public Sprite IdleSprite;
@@ -19,7 +19,12 @@ public class TowerOnBoardController : MonoBehaviour {
 
 	[Header("Projectile")]
 	public GameObject ProjectilePrefab;
-	bool CanAttack = true;
+	[Range(60.0f,1000.0f)]
+	public float TowerRange = 160.0f;
+	public bool CanAttack = true;
+	[Range(0.05f,5.0f)]
+	public float AttackInterval = 0.5f;
+	public float AttackIntervalTimer = 0.0f;
 	// Use this for initialization
 	void Start () {
 		TowerImage.sprite = IdleSprite;
@@ -61,5 +66,10 @@ public class TowerOnBoardController : MonoBehaviour {
 				AnimTimer = AnimInterval;
 			}
 		}
+	}
+
+	void OnDrawGizmos() {
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere (transform.position, TowerRange);
 	}
 }

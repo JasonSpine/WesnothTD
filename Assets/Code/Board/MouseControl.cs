@@ -24,11 +24,15 @@ public class MouseControl : MonoBehaviour {
 
 					Vector2 NewPos = MouseShift + _RectTransform.anchoredPosition;
 
-					if (NewPos.x < BoundarySize) {
+					if (NewPos.x < -FieldsMainController.MapWidth + 1366.0f - 270.0f - 64.0f - BoundarySize) {
+						NewPos.x = -FieldsMainController.MapWidth + 1366.0f - 270.0f - 64.0f - BoundarySize;
+					} else if (NewPos.x > BoundarySize) {
 						NewPos.x = BoundarySize;
 					}
 
-					if (NewPos.y > -BoundarySize) {
+					if (NewPos.y > FieldsMainController.MapHeight -768.0f + 64.0f + BoundarySize) {
+						NewPos.y = FieldsMainController.MapHeight -768.0f + 64.0f + BoundarySize;
+					} else if (NewPos.y < -BoundarySize) {
 						NewPos.y = -BoundarySize;
 					}
 

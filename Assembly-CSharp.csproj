@@ -46,14 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Code\Board\FieldsMainController.cs" />
      <Compile Include="Assets\Code\Board\MouseControl.cs" />
      <Compile Include="Assets\Code\Board\TowerField.cs" />
      <Compile Include="Assets\Code\Towers\Cash.cs" />
      <Compile Include="Assets\Code\Towers\DescriptionController.cs" />
      <Compile Include="Assets\Code\Towers\TowerButtonController.cs" />
-     <Compile Include="Assets\Code\Towers\TowersOnBoard\TowerOnBoardController.cs" />
+     <Compile Include="Assets\Code\Towers\TowersOnBoard\TowerAI.cs" />
+     <Compile Include="Assets\Code\Towers\TowersOnBoard\TowerController.cs" />
      <Compile Include="Assets\Code\Victims\PathNode.cs" />
+     <Compile Include="Assets\Code\Victims\VictimController.cs" />
      <Compile Include="Assets\Code\Victims\VictimPath.cs" />
+     <Compile Include="Assets\Code\Victims\VictimsMainController.cs" />
      <None Include="Assets\Fonts\www.fontsquirrel.com\League-Gothic\SIL Open Font License.txt" />
      <None Include="Assets\Sounds\credits.txt" />
      <None Include="Assets\Fonts\www.1001fonts.com\conformity\Conformity.txt" />
