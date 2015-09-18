@@ -14,13 +14,13 @@ public class MouseControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.mousePosition.x < Screen.width - 270) {
+		if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x < 409.0f) {
 			if (Input.GetMouseButton (0)) {
 				if (!Clicked) {
-					LastMousePos = Input.mousePosition;
+					LastMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 					Clicked = true;
 				} else {
-					Vector2 MouseShift = (Vector2)(Input.mousePosition - LastMousePos);
+					Vector2 MouseShift = (Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition) - LastMousePos);
 
 					Vector2 NewPos = MouseShift + _RectTransform.anchoredPosition;
 
@@ -36,7 +36,7 @@ public class MouseControl : MonoBehaviour {
 
 
 
-					LastMousePos = Input.mousePosition;
+					LastMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				}
 			} else {
 				Clicked = false;
