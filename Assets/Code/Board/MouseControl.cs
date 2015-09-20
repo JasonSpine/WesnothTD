@@ -9,11 +9,13 @@ public class MouseControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Camera.main.transform.position = new Vector3(-BoundarySize, BoundarySize, - 10.0f);
+		transform.position = new Vector3(32.0f -CameraController.instance._CanvasScaler.referenceResolution.x / 2.0f,
+		                                 -32.0f +CameraController.instance._CanvasScaler.referenceResolution.y / 2.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x < 409.0f) {
+		if (Input.mousePosition.x < (float)Screen.width - (270.0f * (float)Screen.width/CameraController.instance._CanvasScaler.referenceResolution.x)) {
 			if (Input.GetMouseButton (0)) {
 				if (!Clicked) {
 					LastMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -25,6 +27,8 @@ public class MouseControl : MonoBehaviour {
 
 					if (NewPos.x < -BoundarySize) {
 						NewPos.x = -BoundarySize;
+					} else {
+						//if FieldsMainController.MapWidth < 
 					}
 
 					if (NewPos.y > BoundarySize) {

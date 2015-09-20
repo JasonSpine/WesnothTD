@@ -6,13 +6,13 @@ public class FieldsMainController : MonoBehaviour {
 	public static float MapHeight = 1.0f;
 	// Use this for initialization
 	void Start () {
-		foreach (RectTransform field in GetComponentsInChildren<RectTransform> ()) {
-			if (field.anchoredPosition.x > MapWidth) {
-				MapWidth = field.anchoredPosition.x;
+		foreach (Transform field in GetComponentsInChildren<Transform> ()) {
+			if (field.localPosition.x > MapWidth) {
+				MapWidth = field.localPosition.x;
 			}
 
-			if (field.anchoredPosition.y < MapHeight) {
-				MapHeight = field.anchoredPosition.y;
+			if (field.localPosition.y < MapHeight) {
+				MapHeight = field.localPosition.y;
 			}
 		}
 
