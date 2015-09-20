@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TowerController : MonoBehaviour {
 	[Header("Animation")]
-	public Image TowerImage;
+	public SpriteRenderer TowerImage;
 	public Sprite IdleSprite;
 	public Sprite[] AttackAnimation;
 	int AnimationIdx = 0;

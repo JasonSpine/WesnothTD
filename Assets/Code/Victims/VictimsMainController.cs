@@ -2,8 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using UnityEngine.UI;
+
 public class VictimsMainController : MonoBehaviour {
 	public static VictimsMainController instance;
+
+	public VictimPath VictimPath1, VictimPath2;
+
+	Button SendWaveButtonReference = null;
 
 	public List <VictimController> AllVictims;
 	void Awake() {
@@ -18,6 +24,12 @@ public class VictimsMainController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void SendWaveButtonAction(Button Caller) {
+		SendWaveButtonReference = Caller;
+
+		SendWaveButtonReference.interactable = false;
 	}
 
 	public VictimController GetColosestVictimInRange(Vector2 from, float radius) {

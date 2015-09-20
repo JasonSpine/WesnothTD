@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class MouseControl : MonoBehaviour {
-	public RectTransform _RectTransform;
 	public float BoundarySize = 20.0f;
 
 	Vector3 LastMousePos;
 	bool Clicked = false;
 	// Use this for initialization
 	void Start () {
-		_RectTransform.anchoredPosition = new Vector2(BoundarySize, -BoundarySize);
+		Camera.main.transform.position = new Vector3(-BoundarySize, BoundarySize, - 10.0f);
 	}
 	
 	// Update is called once per frame
@@ -20,23 +19,19 @@ public class MouseControl : MonoBehaviour {
 					LastMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 					Clicked = true;
 				} else {
-					Vector2 MouseShift = (Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition) - LastMousePos);
+					Vector2 MouseShift = -(Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition) - LastMousePos);
 
-					Vector2 NewPos = MouseShift + _RectTransform.anchoredPosition;
+					Vector2 NewPos = MouseShift + (Vector2)Camera.main.transform.position;
 
-					if (NewPos.x < -FieldsMainController.MapWidth + 1366.0f - 270.0f - 64.0f - BoundarySize) {
-						NewPos.x = -FieldsMainController.MapWidth + 1366.0f - 270.0f - 64.0f - BoundarySize;
-					} else if (NewPos.x > BoundarySize) {
-						NewPos.x = BoundarySize;
+					if (NewPos.x < -BoundarySize) {
+						NewPos.x = -BoundarySize;
 					}
 
-					if (NewPos.y > FieldsMainController.MapHeight -768.0f + 64.0f + BoundarySize) {
-						NewPos.y = FieldsMainController.MapHeight -768.0f + 64.0f + BoundarySize;
-					} else if (NewPos.y < -BoundarySize) {
-						NewPos.y = -BoundarySize;
+					if (NewPos.y > BoundarySize) {
+						NewPos.y = BoundarySize;
 					}
 
-					_RectTransform.anchoredPosition = NewPos;
+					Camera.main.transform.position = new Vector3(NewPos.x, NewPos.y, -10.0f);
 
 
 

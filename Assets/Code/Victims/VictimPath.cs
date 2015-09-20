@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class VictimPath : MonoBehaviour {
-	PathNode[] PathNodes;
+	public PathNode[] PathNodes;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		PathNodes = GetComponentsInChildren<PathNode>();
 	}
 	
