@@ -6,6 +6,8 @@ public class VictimController : MonoBehaviour {
 	[Range(1.0f, 1000.0f)]
 	public float VictimSpeed = 50.0f;
 	int NodeIdx;
+
+	public int PrizeMoney = 10;
 	// Use this for initialization
 	void Start () {
 		NodeIdx = 0;
@@ -21,7 +23,9 @@ public class VictimController : MonoBehaviour {
 			if (NodeIdx < MyPath.PathNodes.Length - 1) {
 				NodeIdx ++;
 			} else {
-				// finished
+				NodeIdx = 0;
+				transform.localPosition = MyPath.PathNodes [NodeIdx].transform.localPosition;
+				Cash.instance.DecLives(1);
 			}
 		}
 	}
