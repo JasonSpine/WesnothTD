@@ -28,11 +28,21 @@ public class MouseControl : MonoBehaviour {
 					if (NewPos.x < -BoundarySize) {
 						NewPos.x = -BoundarySize;
 					} else {
-						//if FieldsMainController.MapWidth < 
+						if (FieldsMainController.MapWidth + 2.0f * BoundarySize + 64.0f < CameraController.instance._CanvasScaler.referenceResolution.x - 270.0f) {
+							NewPos.x = -BoundarySize;
+						} else if (NewPos.x > FieldsMainController.MapWidth - CameraController.instance._CanvasScaler.referenceResolution.x + 270.0f + 64.0f + BoundarySize) {
+							NewPos.x = FieldsMainController.MapWidth - CameraController.instance._CanvasScaler.referenceResolution.x + 270.0f + 64.0f + BoundarySize;
+						}
 					}
 
 					if (NewPos.y > BoundarySize) {
 						NewPos.y = BoundarySize;
+					} else {
+						if (FieldsMainController.MapHeight + 2.0f * BoundarySize + 64.0f < CameraController.instance._CanvasScaler.referenceResolution.y) {
+							NewPos.y = BoundarySize;
+						} else if (NewPos.y < -FieldsMainController.MapHeight + CameraController.instance._CanvasScaler.referenceResolution.y - 64.0f - BoundarySize) {
+							NewPos.y = -FieldsMainController.MapHeight + CameraController.instance._CanvasScaler.referenceResolution.y - 64.0f - BoundarySize;
+						}
 					}
 
 					Camera.main.transform.position = new Vector3(NewPos.x, NewPos.y, -10.0f);

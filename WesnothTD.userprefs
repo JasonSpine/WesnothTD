@@ -2,8 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Board\MouseControl.cs">
     <Files>
+      <File FileName="Assets\Code\Board\MouseControl.cs" Line="41" Column="135" />
       <File FileName="Assets\Code\Board\CameraController.cs" Line="13" Column="93" />
-      <File FileName="Assets\Code\Board\MouseControl.cs" Line="13" Column="37" />
+      <File FileName="Assets\Code\Board\FieldsMainController.cs" Line="22" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
