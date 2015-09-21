@@ -18,8 +18,6 @@ public class FieldsMainController : MonoBehaviour {
 
 		MapHeight = Mathf.Abs (MapHeight);
 
-		Debug.Log (MapWidth);
-		Debug.Log (MapHeight);
 	}
 	
 	// Update is called once per frame
