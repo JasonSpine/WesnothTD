@@ -18,27 +18,27 @@ public class MouseTowerPlacement : MonoBehaviour {
 		}
 	}
 
-	public void Initialize(float TowerRange) {
-		GenRangeDisplay (TowerRange);
-		//TowerSprite.sprite = ;
+	public void Initialize(TowerController _TowerController) {
+		GenRangeDisplay (_TowerController.TowerRange);
+		TowerSprite.sprite = _TowerController.TowerImage.sprite;
+
+		Update ();
+
+		gameObject.SetActive (true);
 	}
 
 	void Awake() {
 		_LineRenderer.sortingOrder = 8;
 		instance = this;
-		Initialize (140.0f);
+
+		gameObject.SetActive (false);
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		transform.position = (Vector2)Camera.main.ScreenToWorldPoint (Input.mousePosition);
 
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.anyKeyDown) {
 			gameObject.SetActive(false);
 		}
 	}

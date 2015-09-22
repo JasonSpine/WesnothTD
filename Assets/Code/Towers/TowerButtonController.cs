@@ -31,4 +31,9 @@ public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 	void Update () {
 	
 	}
+
+	public void ClickAction() {
+		TowerController _TowerController = TowerPrefab.GetComponent<TowerController>();
+		MouseTowerPlacement.instance.Initialize (_TowerController);
+	}
 }
