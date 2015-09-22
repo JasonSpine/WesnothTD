@@ -9,6 +9,8 @@ public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 
 	public DescriptionController Description;
 
+	public GameObject TowerPrefab;
+
 	public void OnPointerEnter (PointerEventData eventData) 
 	{
 		Description.gameObject.SetActive (true);

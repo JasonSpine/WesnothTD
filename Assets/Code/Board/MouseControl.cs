@@ -16,7 +16,7 @@ public class MouseControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.mousePosition.x < (float)Screen.width - (270.0f * (float)Screen.width/CameraController.instance._CanvasScaler.referenceResolution.x)) {
-			if (Input.GetMouseButton (0)) {
+			if (Input.GetMouseButton (1)) {
 				if (!Clicked) {
 					LastMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 					Clicked = true;

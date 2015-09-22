@@ -45,7 +45,6 @@ public class TowerController : MonoBehaviour {
 				TowerRange * Mathf.Sin (Mathf.Deg2Rad * 360.0f * (float)i/(float)(VertexCount - 1)),
 				0.0f));
 		}
-
 	}
 	
 	// Update is called once per frame
