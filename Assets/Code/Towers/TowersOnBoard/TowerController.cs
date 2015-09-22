@@ -25,9 +25,27 @@ public class TowerController : MonoBehaviour {
 	[Range(0.05f,5.0f)]
 	public float AttackInterval = 0.5f;
 	public float AttackIntervalTimer = 0.0f;
+
+	[Header("GUI")]
+	public LineRenderer _LineRenderer;
+
 	// Use this for initialization
 	void Start () {
 		TowerImage.sprite = IdleSprite;
+		_LineRenderer.sortingOrder = 7;
+		GenRangeDisplay ();
+	}
+
+	void GenRangeDisplay() {
+		int VertexCount = 37;
+		_LineRenderer.SetVertexCount (VertexCount);
+		for (int i = 0; i < VertexCount; i++) {
+			_LineRenderer.SetPosition (i, new Vector3(
+				TowerRange * Mathf.Cos (Mathf.Deg2Rad * 360.0f * (float)i/(float)(VertexCount - 1)),
+				TowerRange * Mathf.Sin (Mathf.Deg2Rad * 360.0f * (float)i/(float)(VertexCount - 1)),
+				0.0f));
+		}
+
 	}
 	
 	// Update is called once per frame
