@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;// Required when using Event data.
 
 public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-	public int Price = 100;
-
 	public DescriptionController Description;
 
 	public GameObject TowerPrefab;
@@ -23,7 +21,8 @@ public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 
 	// Use this for initialization
 	void Start () {
-		Description.SetDescriptionValues (Price, 1111);
+		TowerController _TowerController = TowerPrefab.GetComponent<TowerController> ();
+		Description.SetDescriptionValues (_TowerController.Price, _TowerController.Damage);
 		Description.gameObject.SetActive (false);
 	}
 	

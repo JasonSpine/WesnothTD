@@ -77,7 +77,7 @@ public class Cash : MonoBehaviour {
 
 	public void UpdateTowersAvailability() {
 		for (int i = 0; i < TowerButtonControllers.Length; i++) {
-			if (TowerButtonControllers[i].Price > CashValue) {
+			if (TowerButtonControllers[i].TowerPrefab.GetComponent<TowerController>().Price > CashValue) {
 				TowerButtons[i].interactable = false;
 			} else { 
 				TowerButtons[i].interactable = true;

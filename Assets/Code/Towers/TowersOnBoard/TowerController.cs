@@ -19,6 +19,7 @@ public class TowerController : MonoBehaviour {
 
 	[Header("Projectile")]
 	public GameObject ProjectilePrefab;
+	public int Damage = 10;
 	[Range(60.0f,1000.0f)]
 	public float TowerRange = 160.0f;
 	public bool CanAttack = true;
@@ -28,6 +29,7 @@ public class TowerController : MonoBehaviour {
 
 	[Header("GUI")]
 	public LineRenderer _LineRenderer;
+	public int Price;
 
 	// Use this for initialization
 	void Start () {
