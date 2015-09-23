@@ -6,6 +6,8 @@ public class MouseTowerPlacement : MonoBehaviour {
 	public SpriteRenderer TowerSprite;
 	public LineRenderer _LineRenderer;
 	public GameObject TowerParent;
+	public GameObject TowerPrefab;
+	public bool TowerFieldHighlighted = false;
 
 	void GenRangeDisplay(float TowerRange) {
 		int VertexCount = 37;
@@ -22,6 +24,8 @@ public class MouseTowerPlacement : MonoBehaviour {
 		GenRangeDisplay (_TowerController.TowerRange);
 		TowerSprite.sprite = _TowerController.TowerImage.sprite;
 
+		TowerPrefab = _TowerController.gameObject;
+
 		Update ();
 
 		gameObject.SetActive (true);
@@ -36,9 +40,11 @@ public class MouseTowerPlacement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.position = (Vector2)Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		if (!TowerFieldHighlighted) {
+			transform.position = (Vector2)Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		}
 
-		if (Input.anyKeyDown) {
+		if (Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1)) {
 			gameObject.SetActive(false);
 		}
 	}
