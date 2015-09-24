@@ -9,8 +9,9 @@ public class TowerController : MonoBehaviour {
 	public Sprite IdleSprite;
 	public Sprite[] AttackAnimation;
 	int AnimationIdx = 0;
-	bool AnimationPlay = true;
-	bool ReverseAnimationPlay = true;
+	bool AnimationPlay = false;
+	bool ReverseAnimationPlay = false;
+	bool TowerFlipped = false;
 
 	[Range(0.0001f,1.0f)]
 	public float AnimInterval = 0.02f;
@@ -20,6 +21,8 @@ public class TowerController : MonoBehaviour {
 	[Header("Projectile")]
 	public GameObject ProjectilePrefab;
 	public int Damage = 10;
+	public bool InstantiateProjectileAfterAnimation = true;
+	VictimController VictimToAttack = null;
 	[Range(60.0f,1000.0f)]
 	public float TowerRange = 160.0f;
 	public bool CanAttack = true;
@@ -51,6 +54,7 @@ public class TowerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// animation
 		if (AnimationPlay) {
 			if (AnimTimer > 0.0f) {
 				AnimTimer -= Time.deltaTime;
@@ -61,6 +65,10 @@ public class TowerController : MonoBehaviour {
 					AnimationIdx = AttackAnimation.Length - 1;
 					AnimationPlay = false;
 					ReverseAnimationPlay = true;
+
+					if (InstantiateProjectileAfterAnimation) {
+						InstantiateProjectile(VictimToAttack);
+					}
 				}
 
 				TowerImage.sprite = AttackAnimation [AnimationIdx];
@@ -75,7 +83,7 @@ public class TowerController : MonoBehaviour {
 				
 				if (AnimationIdx <= 0) {
 					AnimationIdx = 0;
-					AnimationPlay = true;
+					//AnimationPlay = true;
 					ReverseAnimationPlay = false;
 					TowerImage.sprite = IdleSprite;
 				} else {
@@ -84,6 +92,45 @@ public class TowerController : MonoBehaviour {
 				
 				AnimTimer = AnimInterval;
 			}
+		}
+
+		//Attack cooldown
+		if (!CanAttack) {
+			if (AttackIntervalTimer > 0.0f) {
+				AttackIntervalTimer -= Time.deltaTime;
+			} else {
+				CanAttack = true;
+			}
+		}
+	}
+
+	public void Attack(VictimController VictimToAttack) {
+		this.VictimToAttack = VictimToAttack;
+		FlipToVictim (VictimToAttack.transform.position.x);
+
+		CanAttack = false;
+		AttackIntervalTimer = AttackInterval;
+		AnimationPlay = true;
+
+		if (!InstantiateProjectileAfterAnimation) {
+			InstantiateProjectile(VictimToAttack);
+		}
+	}
+
+	void InstantiateProjectile(VictimController VictimToAttack) {
+		GameObject Projectile = (GameObject)Instantiate (ProjectilePrefab);
+		Projectile.transform.SetParent (MapParentHandle.instance.gameObject.transform);
+
+		Projectile.transform.position = VictimToAttack.transform.position;
+	}
+
+	void FlipToVictim(float VictimPosX) {
+		if (VictimPosX > transform.position.x) {
+			TowerFlipped = false;
+			transform.localRotation = Quaternion.AngleAxis(0.0f, Vector3.up);
+		} else {
+			TowerFlipped = true;
+			transform.localRotation = Quaternion.AngleAxis(180.0f, Vector3.up);
 		}
 	}
 

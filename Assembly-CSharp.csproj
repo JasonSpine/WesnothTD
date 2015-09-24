@@ -48,10 +48,12 @@
   <ItemGroup>
      <Compile Include="Assets\Code\Board\CameraController.cs" />
      <Compile Include="Assets\Code\Board\FieldsMainController.cs" />
+     <Compile Include="Assets\Code\Board\MapParentHandle.cs" />
      <Compile Include="Assets\Code\Board\MouseControl.cs" />
      <Compile Include="Assets\Code\Board\TowerField.cs" />
      <Compile Include="Assets\Code\Towers\Cash.cs" />
      <Compile Include="Assets\Code\Towers\DescriptionController.cs" />
+     <Compile Include="Assets\Code\Towers\Projectiles\ProjectileController.cs" />
      <Compile Include="Assets\Code\Towers\TowerButtonController.cs" />
      <Compile Include="Assets\Code\Towers\TowersOnBoard\MouseTowerPlacement.cs" />
      <Compile Include="Assets\Code\Towers\TowersOnBoard\TowerAI.cs" />

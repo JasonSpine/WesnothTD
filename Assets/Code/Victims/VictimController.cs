@@ -7,6 +7,7 @@ public class VictimController : MonoBehaviour {
 	public float VictimSpeed = 50.0f;
 	int NodeIdx;
 
+	public int VictimHP = 10;
 	public int PrizeMoney = 10;
 	// Use this for initialization
 	void Start () {
