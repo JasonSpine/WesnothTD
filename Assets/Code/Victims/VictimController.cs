@@ -38,4 +38,14 @@ public class VictimController : MonoBehaviour {
 			}
 		}
 	}
+
+	public void DecHP(int Damage) {
+		VictimHP -= Damage;
+
+		if (VictimHP <= 0) {
+			Cash.instance.IncCash(PrizeMoney);
+			VictimsMainController.instance.AllVictims.Remove(this);
+			Destroy(gameObject);
+		}
+	}
 }
