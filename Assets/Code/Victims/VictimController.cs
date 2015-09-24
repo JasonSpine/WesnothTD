@@ -18,7 +18,15 @@ public class VictimController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localPosition = Vector3.MoveTowards (transform.localPosition, MyPath.PathNodes [NodeIdx].transform.localPosition, Time.deltaTime * VictimSpeed);
+		Vector3 MoveTo = Vector3.MoveTowards (transform.localPosition, MyPath.PathNodes [NodeIdx].transform.localPosition, Time.deltaTime * VictimSpeed);
+
+		if (MoveTo.x >= transform.localPosition.x) {
+			transform.localRotation = Quaternion.AngleAxis (0.0f, Vector3.up);
+		} else {
+			transform.localRotation = Quaternion.AngleAxis (180.0f, Vector3.up);
+		}
+
+		transform.localPosition = MoveTo;
 
 		if (Vector3.Distance (transform.localPosition, MyPath.PathNodes [NodeIdx].transform.localPosition) <= 0.01f) {
 			if (NodeIdx < MyPath.PathNodes.Length - 1) {

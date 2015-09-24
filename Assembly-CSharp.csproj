@@ -53,6 +53,7 @@
      <Compile Include="Assets\Code\Board\TowerField.cs" />
      <Compile Include="Assets\Code\Towers\Cash.cs" />
      <Compile Include="Assets\Code\Towers\DescriptionController.cs" />
+     <Compile Include="Assets\Code\Towers\Projectiles\LightBeamProjectile.cs" />
      <Compile Include="Assets\Code\Towers\Projectiles\ProjectileController.cs" />
      <Compile Include="Assets\Code\Towers\TowerButtonController.cs" />
      <Compile Include="Assets\Code\Towers\TowersOnBoard\MouseTowerPlacement.cs" />

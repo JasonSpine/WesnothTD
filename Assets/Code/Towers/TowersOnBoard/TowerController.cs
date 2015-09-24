@@ -118,10 +118,7 @@ public class TowerController : MonoBehaviour {
 	}
 
 	void InstantiateProjectile(VictimController VictimToAttack) {
-		GameObject Projectile = (GameObject)Instantiate (ProjectilePrefab);
-		Projectile.transform.SetParent (MapParentHandle.instance.gameObject.transform);
-
-		Projectile.transform.position = VictimToAttack.transform.position;
+		ProjectilePrefab.GetComponent<ProjectileController> ().InstantiateProjectile (ProjectilePrefab, VictimToAttack, transform);
 	}
 
 	void FlipToVictim(float VictimPosX) {
