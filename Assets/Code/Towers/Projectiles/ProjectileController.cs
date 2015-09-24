@@ -14,6 +14,9 @@ public class ProjectileController : MonoBehaviour {
 	public bool Loop = true;
 
 	public int Damage;
+
+	public AudioClip[] FireSounds;
+
 	public VictimController VictimToAttack;
 
 	public virtual void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, int Damage) {
@@ -30,6 +33,8 @@ public class ProjectileController : MonoBehaviour {
 	void Start () {
 		AnimTimer = AnimInterval;
 		ProjectileImage.sprite = AnimationSprites[AnimationIdx];
+
+		SoundHelper.PlayRandomFromArray (FireSounds);
 	}
 	
 	// Update is called once per frame
