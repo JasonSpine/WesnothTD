@@ -4,7 +4,15 @@ using System.Collections;
 public class ProjectileController : MonoBehaviour {
 	[Header("Animation")]
 	public SpriteRenderer ProjectileImage;
-	public Sprite[] AnimationSprites;
+
+	[System.Serializable]
+	public class SpritesArray
+	{
+		public Sprite[] Sprites;
+	}
+
+	public SpritesArray[] AnimationsSprites;
+	protected SpritesArray AnimationSprites;
 	protected int AnimationIdx = 0;
 	protected bool AnimationPlay = true;
 	[Range(0.0001f,1.0f)]
@@ -50,8 +58,9 @@ public class ProjectileController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		AnimationSprites = AnimationsSprites [Random.Range (0, (AnimationsSprites.Length))];
 		AnimTimer = AnimInterval;
-		ProjectileImage.sprite = AnimationSprites[AnimationIdx];
+		ProjectileImage.sprite = AnimationSprites.Sprites[AnimationIdx];
 
 		SoundHelper.PlayRandomFromArray (FireSounds);
 	}
@@ -80,8 +89,8 @@ public class ProjectileController : MonoBehaviour {
 			} else {
 				AnimationIdx++;
 			
-				if (AnimationIdx >= AnimationSprites.Length) {
-					AnimationIdx = AnimationSprites.Length - 1;
+				if (AnimationIdx >= AnimationSprites.Sprites.Length) {
+					AnimationIdx = AnimationSprites.Sprites.Length - 1;
 					AnimationPlay = false;
 					AnimTimer = AnimInterval;
 					HitVictimAfterAnimation ();
@@ -90,7 +99,7 @@ public class ProjectileController : MonoBehaviour {
 					AnimationIdx = 0;
 				}
 			
-				ProjectileImage.sprite = AnimationSprites [AnimationIdx];
+				ProjectileImage.sprite = AnimationSprites.Sprites [AnimationIdx];
 			
 				AnimTimer = AnimInterval;
 			}

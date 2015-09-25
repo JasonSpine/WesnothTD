@@ -39,14 +39,14 @@ public class LightBeamProjectile : ProjectileController {
 			} else {
 				AnimationIdx++;
 			
-				if (AnimationIdx >= AnimationSprites.Length) {
-					AnimationIdx = AnimationSprites.Length - 1;
+				if (AnimationIdx >= AnimationSprites.Sprites.Length) {
+					AnimationIdx = AnimationSprites.Sprites.Length - 1;
 					AnimationPlay = false;
 					AnimTimer = AnimInterval;
 					HitVictimAfterAnimation ();
 				}
 			
-				ProjectileImage.sprite = AnimationSprites [AnimationIdx];
+				ProjectileImage.sprite = AnimationSprites.Sprites [AnimationIdx];
 			
 				AnimTimer = AnimInterval;
 			}
@@ -54,12 +54,12 @@ public class LightBeamProjectile : ProjectileController {
 			if (AnimTimer > 0.0f) {
 				AnimTimer -= Time.deltaTime;
 			} else {
-				ProjectileImage.sprite = AnimationSprites [AnimationIdx];
+				ProjectileImage.sprite = AnimationSprites.Sprites [AnimationIdx];
 				AnimationIdx--;
 			
 				if (AnimationIdx < 0) {
 					AnimationIdx = 0;
-					ProjectileImage.sprite = AnimationSprites [AnimationIdx];
+					ProjectileImage.sprite = AnimationSprites.Sprites [AnimationIdx];
 					Destroy (gameObject);
 				}
 			
