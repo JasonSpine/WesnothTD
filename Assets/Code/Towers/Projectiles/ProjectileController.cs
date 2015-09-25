@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ProjectileController : MonoBehaviour {
 	[Header("Animation")]
+	public bool RotatingProjectile = false;
+	public float RotatingProjectileRate = 100.0f;
 	public SpriteRenderer ProjectileImage;
 
 	[System.Serializable]
@@ -78,6 +80,11 @@ public class ProjectileController : MonoBehaviour {
 		Quaternion.AngleAxis (Mathf.Rad2Deg * Mathf.Atan2 (VictimToAttack.transform.position.y - transform.position.y,
 	                            VictimToAttack.transform.position.x - transform.position.x), Vector3.forward), RotateSpeed * Time.deltaTime
 		);
+
+		//self rotation
+		if (RotatingProjectile) {
+			ProjectileImage.transform.Rotate (new Vector3(0.0f, 0.0f, RotatingProjectileRate * Time.deltaTime));
+		}
 
 		// move
 		transform.position += transform.right * MoveSpeed;
