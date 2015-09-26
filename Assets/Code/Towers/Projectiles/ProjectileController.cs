@@ -37,7 +37,11 @@ public class ProjectileController : MonoBehaviour {
 	public bool Poisoned = false;
 	public float PoisonStrength = 1.0f;
 
-	public virtual void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, float Damage, float PoisonStrength) {
+	[Header("Slow")]
+	public bool Slowing = false;
+	public float SlowStrength = 1.0f;
+
+	public virtual void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, float Damage, float PoisonStrength, float SlowTo) {
 		if (VictimToAttack == null)
 			return;
 
@@ -52,6 +56,7 @@ public class ProjectileController : MonoBehaviour {
 		
 		_ProjectileController.Damage = Damage;
 		_ProjectileController.PoisonStrength = PoisonStrength;
+		_ProjectileController.SlowStrength = SlowTo;
 
 		Projectile.transform.localRotation = Quaternion.AngleAxis (
 			Mathf.Rad2Deg * Mathf.Atan2(VictimToAttack.transform.position.y - Projectile.transform.position.y,
@@ -131,15 +136,28 @@ public class ProjectileController : MonoBehaviour {
 				BE.transform.position = transform.position;
 			}
 
+			SlowVictim();
+			PoisonVictim();
+
 			VictimToAttack.DecHP(Damage);
-			if (Poisoned) {
-				VictimToAttack.Poison(PoisonStrength);
-			}
+
 			Destroy(gameObject);
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		HitVictimOnCollision (other);
+	}
+
+	protected void SlowVictim() {
+		if (Poisoned) {
+			VictimToAttack.Poison(PoisonStrength);
+		}
+	}
+
+	protected void PoisonVictim() {
+		if (Slowing) {
+			VictimToAttack.SlowDown(SlowStrength);
+		}
 	}
 }

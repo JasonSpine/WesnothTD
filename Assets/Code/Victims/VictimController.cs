@@ -22,9 +22,10 @@ public class VictimController : MonoBehaviour {
 	float PoisonMaxHpLoseRate = 20.0f;
 
 	bool Slowed;
-	float SlowTimeLeft = 0.0f;
-	float SlowSpeedLost = 0.0f;
-	float MinSpeed = 30.0f;
+	[SerializeField]
+	float SlowSpeed;
+	float RegainSpeedRate = 4.0f;
+
 	// Use this for initialization
 	void Start () {
 		NodeIdx = 0;
@@ -33,6 +34,8 @@ public class VictimController : MonoBehaviour {
 
 		_HpBackground.sortingOrder = 4;
 		_HpBar.sortingOrder = 5;
+
+		SlowSpeed = VictimSpeed;
 	}
 	
 	// Update is called once per frame
@@ -51,8 +54,18 @@ public class VictimController : MonoBehaviour {
 			DecHP(Time.deltaTime * PoisonHpLoseRate);
 		}
 
+		// Handle Slow
+		if (Slowed) {
+			if (SlowSpeed < VictimSpeed) {
+				SlowSpeed += Time.deltaTime * RegainSpeedRate;
+			} else {
+				Slowed = false;
+				SlowSpeed = VictimSpeed;
+			}
+		}
+
 		// move
-		Vector3 MoveTo = Vector3.MoveTowards (transform.localPosition, MyPath.PathNodes [NodeIdx].transform.localPosition, Time.deltaTime * VictimSpeed);
+		Vector3 MoveTo = Vector3.MoveTowards (transform.localPosition, MyPath.PathNodes [NodeIdx].transform.localPosition, Time.deltaTime * (Slowed?SlowSpeed:VictimSpeed));
 
 		if (MoveTo.x >= transform.localPosition.x) {
 			VictimSpriteParent.transform.localRotation = Quaternion.AngleAxis (0.0f, Vector3.up);
@@ -104,8 +117,9 @@ public class VictimController : MonoBehaviour {
 		}
 	}
 
-	public void SlowDown() {
+	public void SlowDown(float SlowTo) {
 		Slowed = true;
 
+		SlowSpeed = Mathf.Min (SlowSpeed, SlowTo);
 	}
 }

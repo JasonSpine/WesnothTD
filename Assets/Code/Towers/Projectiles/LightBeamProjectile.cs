@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LightBeamProjectile : ProjectileController {
 
-	public override void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, float Damage, float PoisonStrength) {
+	public override void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, float Damage, float PoisonStrength, float SlowTo) {
 		if (VictimToAttack == null)
 			return;
 
@@ -12,9 +12,14 @@ public class LightBeamProjectile : ProjectileController {
 		
 		Projectile.transform.localPosition = Vector3.zero;
 
-		Projectile.GetComponent<ProjectileController> ().VictimToAttack = VictimToAttack;
+		ProjectileController _ProjectileController = Projectile.GetComponent<ProjectileController> ();
 
-		Projectile.GetComponent<ProjectileController> ().Damage = Damage;
+		_ProjectileController.VictimToAttack = VictimToAttack;
+
+		_ProjectileController.PoisonStrength = PoisonStrength;
+		_ProjectileController.SlowStrength = SlowTo;
+
+		_ProjectileController.Damage = Damage;
 	}
 
 	protected override void HitVictimOnCollision(Collider2D other) {
@@ -22,6 +27,8 @@ public class LightBeamProjectile : ProjectileController {
 	}
 
 	protected override void HitVictimAfterAnimation() {
+		SlowVictim();
+		PoisonVictim();
 		VictimToAttack.DecHP (Damage);
 	}
 

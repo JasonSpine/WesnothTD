@@ -32,6 +32,7 @@ public class TowerController : MonoBehaviour {
 
 	[Header("Special")]
 	public float PoisonStrength = 5.0f;
+	public float SlowTo = 5.0f;
 
 	[Header("GUI")]
 	public LineRenderer _LineRenderer;
@@ -121,7 +122,7 @@ public class TowerController : MonoBehaviour {
 	}
 
 	protected virtual void InstantiateProjectile(VictimController VictimToAttack) {
-		ProjectilePrefab.GetComponent<ProjectileController> ().InstantiateProjectile (ProjectilePrefab, VictimToAttack, transform, Damage, PoisonStrength);
+		ProjectilePrefab.GetComponent<ProjectileController> ().InstantiateProjectile (ProjectilePrefab, VictimToAttack, transform, Damage, PoisonStrength, SlowTo);
 	}
 
 	void FlipToVictim(float VictimPosX) {
