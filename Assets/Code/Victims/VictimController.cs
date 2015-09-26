@@ -7,13 +7,24 @@ public class VictimController : MonoBehaviour {
 	public float VictimSpeed = 50.0f;
 	int NodeIdx;
 
-	public int VictimHP = 10;
-	public int MaxHP = 10;
+	public float VictimHP = 10.0f;
+	public float MaxHP = 10.0f;
 
 	public LineRenderer _HpBackground;
 	public LineRenderer _HpBar;
 	public int PrizeMoney = 10;
 	public GameObject VictimSpriteParent;
+	public SpriteRenderer VictimSprite;
+
+	bool Poisoned;
+	float PoisonTimeLeft = 0.0f;
+	float PoisonHpLoseRate = 0.0f;
+	float PoisonMaxHpLoseRate = 20.0f;
+
+	bool Slowed;
+	float SlowTimeLeft = 0.0f;
+	float SlowSpeedLost = 0.0f;
+	float MinSpeed = 30.0f;
 	// Use this for initialization
 	void Start () {
 		NodeIdx = 0;
@@ -26,6 +37,20 @@ public class VictimController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// HandlePoison
+		if (Poisoned) {
+			if (PoisonTimeLeft > 0.0f) {
+				PoisonTimeLeft -= Time.deltaTime;
+			} else {
+				Poisoned = false;
+				PoisonTimeLeft = 0.0f;
+				PoisonHpLoseRate = 0.0f;
+				VictimSprite.color = Color.white;
+			}
+
+			DecHP(Time.deltaTime * PoisonHpLoseRate);
+		}
+
 		// move
 		Vector3 MoveTo = Vector3.MoveTowards (transform.localPosition, MyPath.PathNodes [NodeIdx].transform.localPosition, Time.deltaTime * VictimSpeed);
 
@@ -48,22 +73,39 @@ public class VictimController : MonoBehaviour {
 		}
 	}
 
-	public void DecHP(int Damage) {
+	public void DecHP(float Damage) {
 		VictimHP -= Damage;
 
-		if (VictimHP <= 0) {
-			VictimHP = 0;
+		if (VictimHP <= 0.0f) {
+			VictimHP = 0.0f;
 			Cash.instance.IncCash(PrizeMoney);
 			VictimsMainController.instance.AllVictims.Remove(this);
 			Destroy(gameObject);
 		}
 
-		float HpFactor = (float)VictimHP/(float)MaxHP;
+		float HpFactor = VictimHP/MaxHP;
 
 		Color col = new Color (1.0f - HpFactor, HpFactor, HpFactor, 1.0f);
 
 		_HpBar.SetColors (col, col);
 
 		_HpBar.SetPosition(1, new Vector3((HpFactor * 10.0f) - 5.0f, 0.0f, 0.0f));
+	}
+
+	public void Poison(float PoisonStrength) {
+		VictimSprite.color = new Color (0.5f, 1.0f, 0.5f, 1.0f);
+		Poisoned = true;
+
+		PoisonTimeLeft += 1.0f;
+		PoisonHpLoseRate += PoisonStrength;
+
+		if (PoisonHpLoseRate > PoisonMaxHpLoseRate) {
+			PoisonHpLoseRate = PoisonMaxHpLoseRate;
+		}
+	}
+
+	public void SlowDown() {
+		Slowed = true;
+
 	}
 }

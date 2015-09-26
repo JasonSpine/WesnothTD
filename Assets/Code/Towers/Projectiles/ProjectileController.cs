@@ -22,7 +22,7 @@ public class ProjectileController : MonoBehaviour {
 	
 	protected float AnimTimer = 0.0f;
 
-	public int Damage;
+	public float Damage;
 
 	public AudioClip[] FireSounds;
 
@@ -33,7 +33,11 @@ public class ProjectileController : MonoBehaviour {
 
 	public GameObject BlastEffect = null;
 
-	public virtual void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, int Damage) {
+	[Header("Poison")]
+	public bool Poisoned = false;
+	public float PoisonStrength = 1.0f;
+
+	public virtual void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, float Damage, float PoisonStrength) {
 		if (VictimToAttack == null)
 			return;
 
@@ -47,6 +51,7 @@ public class ProjectileController : MonoBehaviour {
 		_ProjectileController.VictimToAttack = VictimToAttack;
 		
 		_ProjectileController.Damage = Damage;
+		_ProjectileController.PoisonStrength = PoisonStrength;
 
 		Projectile.transform.localRotation = Quaternion.AngleAxis (
 			Mathf.Rad2Deg * Mathf.Atan2(VictimToAttack.transform.position.y - Projectile.transform.position.y,
@@ -127,6 +132,9 @@ public class ProjectileController : MonoBehaviour {
 			}
 
 			VictimToAttack.DecHP(Damage);
+			if (Poisoned) {
+				VictimToAttack.Poison(PoisonStrength);
+			}
 			Destroy(gameObject);
 		}
 	}

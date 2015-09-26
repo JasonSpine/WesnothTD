@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LightBeamProjectile : ProjectileController {
 
-	public override void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, int Damage) {
+	public override void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, float Damage, float PoisonStrength) {
 		if (VictimToAttack == null)
 			return;
 

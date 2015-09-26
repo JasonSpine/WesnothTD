@@ -20,7 +20,7 @@ public class TowerController : MonoBehaviour {
 
 	[Header("Projectile")]
 	public GameObject ProjectilePrefab;
-	public int Damage = 10;
+	public float Damage = 10.0f;
 	public bool InstantiateProjectileAfterAnimation = true;
 	VictimController VictimToAttack = null;
 	[Range(60.0f,1000.0f)]
@@ -29,6 +29,9 @@ public class TowerController : MonoBehaviour {
 	[Range(0.05f,5.0f)]
 	public float AttackInterval = 0.5f;
 	public float AttackIntervalTimer = 0.0f;
+
+	[Header("Special")]
+	public float PoisonStrength = 5.0f;
 
 	[Header("GUI")]
 	public LineRenderer _LineRenderer;
@@ -117,8 +120,8 @@ public class TowerController : MonoBehaviour {
 		}
 	}
 
-	void InstantiateProjectile(VictimController VictimToAttack) {
-		ProjectilePrefab.GetComponent<ProjectileController> ().InstantiateProjectile (ProjectilePrefab, VictimToAttack, transform, Damage);
+	protected virtual void InstantiateProjectile(VictimController VictimToAttack) {
+		ProjectilePrefab.GetComponent<ProjectileController> ().InstantiateProjectile (ProjectilePrefab, VictimToAttack, transform, Damage, PoisonStrength);
 	}
 
 	void FlipToVictim(float VictimPosX) {

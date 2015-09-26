@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DescriptionController : MonoBehaviour {
 	public Text DescriptionValues;
 
-	public void SetDescriptionValues(int Price, int Damage) {
+	public void SetDescriptionValues(int Price, float Damage) {
 		DescriptionValues.text =
 			"$" + Price.ToString () + "\n"
 			+ Damage.ToString ();
