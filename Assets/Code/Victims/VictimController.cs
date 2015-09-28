@@ -26,8 +26,8 @@ public class VictimController : MonoBehaviour {
 	float SlowSpeed;
 	float RegainSpeedRate = 4.0f;
 
-	// Use this for initialization
-	void Start () {
+	// Use this for initialization in group controller
+	public void Initialize () {
 		NodeIdx = 0;
 		transform.localPosition = MyPath.PathNodes [NodeIdx].transform.localPosition;
 		NodeIdx ++;

@@ -12,18 +12,59 @@ public class VictimsMainController : MonoBehaviour {
 	Button SendWaveButtonReference = null;
 
 	public List <VictimController> AllVictims;
+
+	[System.Serializable]
+	public enum VictimEnumID {
+		UNDEAD,
+		LIZARD,
+		WOLF,
+		DRAKE,
+		LOYALIST,
+		TROLL
+	}
+
+	[System.Serializable]
+	public class VictimPrefabItem {
+		public VictimEnumID VictimID;
+		public GameObject VictimPrefab;
+	}
+
+	public VictimPrefabItem[] VictimPrefabs;
+
 	void Awake() {
 		instance = this;
 	}
 
 	// Use this for initialization
 	void Start () {
-	
+		//debug
+
+		AddVictim (VictimEnumID.UNDEAD, VictimPath1);
+		AddVictim (VictimEnumID.UNDEAD, VictimPath2);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void AddVictim(VictimEnumID VictimID, VictimPath _VictimPath) {
+		GameObject VictimPrefab;
+
+		foreach (VictimPrefabItem item in VictimPrefabs) {
+			if (item.VictimID == VictimID) {
+				GameObject VictimObj = (GameObject)Instantiate(item.VictimPrefab);
+				VictimObj.transform.SetParent(transform);
+
+				VictimController _VictimController = VictimObj.GetComponent<VictimController>();
+
+				_VictimController.MyPath = _VictimPath;
+
+				AllVictims.Add(_VictimController);
+
+				_VictimController.Initialize ();
+			}
+		}
 	}
 
 	public void SendWaveButtonAction(Button Caller) {
