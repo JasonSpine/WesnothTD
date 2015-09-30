@@ -31,21 +31,60 @@ public class VictimsMainController : MonoBehaviour {
 
 	public VictimPrefabItem[] VictimPrefabs;
 
+
+	[Header("Waves")]
+	[Range(0.01f, 4.0f)]
+	public float PairReleaseInterval;
+	float PairReleaseIntervalTimer = 0.0f;
+	public int VictimPairsAmountInEachWave;
+	protected int VictimPairsToReleaseInCurrentWave;
+
+	public int WavesCount;
+	public VictimEnumID[] WavesPattern;
+	int CurrentWave = -1;
+
+	public float VictimsHp = 10.0f;
+	bool WaveRelease = false;
+
+	[Range(1.0f, 5.0f)]
+	public float VictimsHpIncreaseMultiplier = 1.2f;
+	public int VictimsPrize = 5;
+	public int VictimsPrizeIncrease = 1;
+
+
 	void Awake() {
 		instance = this;
 	}
 
 	// Use this for initialization
 	void Start () {
-		//debug
 
-		AddVictim (VictimEnumID.UNDEAD, VictimPath1);
-		AddVictim (VictimEnumID.UNDEAD, VictimPath2);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (WaveRelease) {
+			VictimsReleaser();
+		}
+	}
+
+	void VictimsReleaser() {
+		if (PairReleaseIntervalTimer > 0.0f) {
+			PairReleaseIntervalTimer -= Time.deltaTime;
+		} else {
+			VictimPairsToReleaseInCurrentWave --;
+
+			AddVictim (WavesPattern[CurrentWave % WavesPattern.Length], VictimPath1);
+			AddVictim (WavesPattern[CurrentWave % WavesPattern.Length], VictimPath2);
+
+			if (VictimPairsToReleaseInCurrentWave <= 0) {
+				WaveRelease = false;
+				SendWaveButtonReference.interactable = true;
+				PairReleaseIntervalTimer = 0.0f;
+			} else {
+				PairReleaseIntervalTimer = PairReleaseInterval;
+			}
+		}
 	}
 
 	void AddVictim(VictimEnumID VictimID, VictimPath _VictimPath) {
@@ -62,15 +101,19 @@ public class VictimsMainController : MonoBehaviour {
 
 				AllVictims.Add(_VictimController);
 
-				_VictimController.Initialize ();
+				_VictimController.Initialize (VictimsHp, VictimsPrize, VictimPairsToReleaseInCurrentWave);
 			}
 		}
 	}
 
 	public void SendWaveButtonAction(Button Caller) {
+		CurrentWave ++;
 		SendWaveButtonReference = Caller;
 
 		SendWaveButtonReference.interactable = false;
+		WaveRelease = true;
+
+		VictimPairsToReleaseInCurrentWave = VictimPairsAmountInEachWave;
 	}
 
 	public VictimController GetColosestVictimInRange(Vector2 from, float radius) {

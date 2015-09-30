@@ -16,14 +16,16 @@ public class TowerField : MonoBehaviour {
 			MouseTowerPlacement.instance.TowerParent.transform.position = transform.position;
 
 			if (Input.GetMouseButtonDown(0)) {
-				GameObject InstantiatedTower = (GameObject)Instantiate(MouseTowerPlacement.instance.TowerPrefab);
-				InstantiatedTower.transform.SetParent(transform);
-				InstantiatedTower.transform.localPosition = Vector3.zero;
-				TowerPlaced = true;
+				if (Input.mousePosition.x < (float)Screen.width - (270.0f * (float)Screen.width/CameraController.instance._CanvasScaler.referenceResolution.x)) {
+					GameObject InstantiatedTower = (GameObject)Instantiate(MouseTowerPlacement.instance.TowerPrefab);
+					InstantiatedTower.transform.SetParent(transform);
+					InstantiatedTower.transform.localPosition = Vector3.zero;
+					TowerPlaced = true;
 
-				Cash.instance.DecCash(MouseTowerPlacement.instance.TowerPrefab.GetComponent<TowerController>().Price);
-				OnMouseExit();
-				MouseTowerPlacement.instance.gameObject.SetActive(false);
+					Cash.instance.DecCash(MouseTowerPlacement.instance.TowerPrefab.GetComponent<TowerController>().Price);
+					OnMouseExit();
+					MouseTowerPlacement.instance.gameObject.SetActive(false);
+				}
 			}
 		} else {
 			_SpriteRenderer.color = Color.white;

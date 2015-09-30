@@ -19,7 +19,6 @@ public class VictimController : MonoBehaviour {
 	bool Poisoned;
 	float PoisonTimeLeft = 0.0f;
 	float PoisonHpLoseRate = 0.0f;
-	float PoisonMaxHpLoseRate = 20.0f;
 
 	bool Slowed;
 	[SerializeField]
@@ -27,15 +26,19 @@ public class VictimController : MonoBehaviour {
 	float RegainSpeedRate = 4.0f;
 
 	// Use this for initialization in group controller
-	public void Initialize () {
+	public void Initialize (float Hp, int Prize, int SortingOrder) {
 		NodeIdx = 0;
 		transform.localPosition = MyPath.PathNodes [NodeIdx].transform.localPosition;
 		NodeIdx ++;
 
-		_HpBackground.sortingOrder = 4;
-		_HpBar.sortingOrder = 5;
+		VictimSprite.sortingOrder = SortingOrder * 4;
+		_HpBackground.sortingOrder = (SortingOrder * 4) + 1;
+		_HpBar.sortingOrder = (SortingOrder * 4) + 2;
 
 		SlowSpeed = VictimSpeed;
+
+		MaxHP = VictimHP = Hp;
+		PrizeMoney = Prize;
 	}
 	
 	// Update is called once per frame
@@ -109,12 +112,8 @@ public class VictimController : MonoBehaviour {
 		VictimSprite.color = new Color (0.5f, 1.0f, 0.5f, 1.0f);
 		Poisoned = true;
 
-		PoisonTimeLeft += 1.0f;
+		PoisonTimeLeft += 3.0f;
 		PoisonHpLoseRate += PoisonStrength;
-
-		if (PoisonHpLoseRate > PoisonMaxHpLoseRate) {
-			PoisonHpLoseRate = PoisonMaxHpLoseRate;
-		}
 	}
 
 	public void SlowDown(float SlowTo) {
