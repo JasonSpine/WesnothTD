@@ -38,6 +38,19 @@ public class TowerController : MonoBehaviour {
 	public LineRenderer _LineRenderer;
 	public int Price;
 
+	public enum AIBehavior {
+		SLOWEST,
+		FASTEST,
+		MORE_POISONED,
+		LESS_POISONED,
+		MORE_HP,
+		LESS_HP,
+		CLOSEST,
+		FURTHEST
+	}
+
+	public AIBehavior TowerAIBehavior;
+
 	// Use this for initialization
 	void Start () {
 		TowerImage.sprite = IdleSprite;

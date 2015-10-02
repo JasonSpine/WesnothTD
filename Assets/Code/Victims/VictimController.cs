@@ -121,4 +121,20 @@ public class VictimController : MonoBehaviour {
 
 		SlowSpeed = Mathf.Min (SlowSpeed, SlowTo);
 	}
+
+	public float GetVictimSpeed() {
+		if (Slowed) {
+			return SlowSpeed;
+		} else {
+			return VictimSpeed;
+		}
+	}
+
+	public float GetVictimPoison() {
+		if (Poisoned) {
+			return PoisonHpLoseRate;
+		} else {
+			return 0.0f;
+		}
+	}
 }

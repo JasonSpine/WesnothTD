@@ -11,7 +11,8 @@ public class TowerAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (_TowerController.CanAttack) {
-			VictimController VictimToAttack = VictimsMainController.instance.GetColosestVictimInRange ((Vector2)transform.position, _TowerController.TowerRange);
+
+			VictimController VictimToAttack = VictimsMainController.instance.GetVictimInRange ((Vector2)transform.position, _TowerController.TowerRange, _TowerController.TowerAIBehavior);
 
 			if (VictimToAttack != null) {
 				_TowerController.Attack(VictimToAttack);
