@@ -35,6 +35,7 @@ public class TowerController : MonoBehaviour {
 	public float SlowTo = 5.0f;
 
 	[Header("GUI")]
+	public string TowerName;
 	public LineRenderer _LineRenderer;
 	public int Price;
 

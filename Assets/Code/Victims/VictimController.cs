@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class VictimController : MonoBehaviour {
+	public VictimsMainController.VictimEnumID VictimID;
 	public VictimPath MyPath; // variable set by VictimsMainController
 	[Range(1.0f, 1000.0f)]
 	public float VictimSpeed = 50.0f;

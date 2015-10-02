@@ -11,6 +11,8 @@ public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 
 	public void OnPointerEnter (PointerEventData eventData) 
 	{
+		TowerController _TowerController = TowerPrefab.GetComponent<TowerController> ();
+		Description.SetDescriptionValues (_TowerController);
 		Description.gameObject.SetActive (true);
 	}
 
@@ -21,9 +23,7 @@ public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 
 	// Use this for initialization
 	void Start () {
-		TowerController _TowerController = TowerPrefab.GetComponent<TowerController> ();
-		Description.SetDescriptionValues (_TowerController.Price, _TowerController.Damage);
-		Description.gameObject.SetActive (false);
+
 	}
 	
 	// Update is called once per frame

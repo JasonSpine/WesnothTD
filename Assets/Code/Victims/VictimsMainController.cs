@@ -23,13 +23,7 @@ public class VictimsMainController : MonoBehaviour {
 		TROLL
 	}
 
-	[System.Serializable]
-	public class VictimPrefabItem {
-		public VictimEnumID VictimID;
-		public GameObject VictimPrefab;
-	}
-
-	public VictimPrefabItem[] VictimPrefabs;
+	public GameObject[] VictimPrefabs;
 
 
 	[Header("Waves")]
@@ -92,9 +86,9 @@ public class VictimsMainController : MonoBehaviour {
 	void AddVictim(VictimEnumID VictimID, VictimPath _VictimPath) {
 		GameObject VictimPrefab;
 
-		foreach (VictimPrefabItem item in VictimPrefabs) {
-			if (item.VictimID == VictimID) {
-				GameObject VictimObj = (GameObject)Instantiate(item.VictimPrefab);
+		foreach (GameObject victim in VictimPrefabs) {
+			if (victim.GetComponent<VictimController>().VictimID == VictimID) {
+				GameObject VictimObj = (GameObject)Instantiate(victim);
 				VictimObj.transform.SetParent(transform);
 
 				VictimController _VictimController = VictimObj.GetComponent<VictimController>();
@@ -104,6 +98,8 @@ public class VictimsMainController : MonoBehaviour {
 				AllVictims.Add(_VictimController);
 
 				_VictimController.Initialize (VictimsHp, VictimsPrize, VictimPairsToReleaseInCurrentWave);
+
+				break;
 			}
 		}
 	}

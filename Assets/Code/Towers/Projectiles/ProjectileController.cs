@@ -41,6 +41,12 @@ public class ProjectileController : MonoBehaviour {
 	public bool Slowing = false;
 	public float SlowStrength = 1.0f;
 
+	[Header("ProsCons")]
+	public VictimsMainController.VictimEnumID StrongerAgainst;
+	public VictimsMainController.VictimEnumID WeakerAgainst;
+	[TextArea(3,10)]
+	public string ProjectileAbility;
+
 	public virtual void InstantiateProjectile(GameObject ProjectilePrefab, VictimController VictimToAttack, Transform TowerTransform, float Damage, float PoisonStrength, float SlowTo) {
 		if (VictimToAttack == null)
 			return;
@@ -136,6 +142,7 @@ public class ProjectileController : MonoBehaviour {
 				BE.transform.position = transform.position;
 			}
 
+			AdjustDamage();
 			SlowVictim();
 			PoisonVictim();
 
@@ -150,14 +157,22 @@ public class ProjectileController : MonoBehaviour {
 	}
 
 	protected void SlowVictim() {
+		if (Slowing) {
+			VictimToAttack.SlowDown(SlowStrength);
+		}
+	}
+
+	protected void PoisonVictim() {
 		if (Poisoned) {
 			VictimToAttack.Poison(PoisonStrength);
 		}
 	}
 
-	protected void PoisonVictim() {
-		if (Slowing) {
-			VictimToAttack.SlowDown(SlowStrength);
+	protected void AdjustDamage() {
+		if (VictimToAttack.VictimID == StrongerAgainst) {
+			Damage *= 1.5f;
+		} else if (VictimToAttack.VictimID == WeakerAgainst) {
+			Damage *= 0.5f;
 		}
 	}
 }

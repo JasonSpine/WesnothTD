@@ -29,6 +29,9 @@ public class LightBeamProjectile : ProjectileController {
 	protected override void HitVictimAfterAnimation() {
 		SlowVictim();
 		PoisonVictim();
+
+		AdjustDamage ();
+
 		VictimToAttack.DecHP (Damage);
 	}
 
