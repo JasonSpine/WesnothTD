@@ -36,6 +36,7 @@ public class TowerController : MonoBehaviour {
 
 	[Header("GUI")]
 	public string TowerName;
+	public int TowerLevel = 1;
 	public LineRenderer _LineRenderer;
 	public int Price;
 
@@ -59,7 +60,7 @@ public class TowerController : MonoBehaviour {
 		GenRangeDisplay ();
 	}
 
-	void GenRangeDisplay() {
+	public void GenRangeDisplay() {
 		int VertexCount = 37;
 		_LineRenderer.SetVertexCount (VertexCount);
 		for (int i = 0; i < VertexCount; i++) {
@@ -69,9 +70,25 @@ public class TowerController : MonoBehaviour {
 				0.0f));
 		}
 	}
-	
+
+	void AI () {
+		if (CanAttack) {
+			VictimToAttack = FindVictim();
+			
+			if (VictimToAttack != null) {
+				Attack ();
+			}
+		}
+	}
+
+	VictimController FindVictim() {
+		return VictimsMainController.instance.GetVictimInRange ((Vector2)transform.position, TowerRange, TowerAIBehavior);
+	}
+
 	// Update is called once per frame
 	void Update () {
+		AI ();
+
 		// animation
 		if (AnimationPlay) {
 			if (AnimTimer > 0.0f) {
@@ -85,6 +102,9 @@ public class TowerController : MonoBehaviour {
 					ReverseAnimationPlay = true;
 
 					if (InstantiateProjectileAfterAnimation) {
+						if (VictimToAttack == null) {
+							VictimToAttack = FindVictim();
+						}
 						InstantiateProjectile(VictimToAttack);
 					}
 				}
@@ -122,8 +142,7 @@ public class TowerController : MonoBehaviour {
 		}
 	}
 
-	public void Attack(VictimController VictimToAttack) {
-		this.VictimToAttack = VictimToAttack;
+	public void Attack() {
 		FlipToVictim (VictimToAttack.transform.position.x);
 
 		CanAttack = false;
@@ -131,6 +150,9 @@ public class TowerController : MonoBehaviour {
 		AnimationPlay = true;
 
 		if (!InstantiateProjectileAfterAnimation) {
+			if (VictimToAttack == null) {
+				VictimToAttack = FindVictim();
+			}
 			InstantiateProjectile(VictimToAttack);
 		}
 	}

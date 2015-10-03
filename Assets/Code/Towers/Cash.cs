@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Cash : MonoBehaviour {
 	[Header("Cash")]
 	public Text CashAmount;
-	int CashValue;
+	public int CashValue;
 	public int InitialCashValue = 500;
 
 	[Header("Lives")]
@@ -38,6 +38,10 @@ public class Cash : MonoBehaviour {
 
 	public void IncCash(int c) {
 		SetCash (CashValue + c);
+
+		if (UpgradeController.instance.SelectedTower != null) {
+			UpgradeController.instance.SetDescriptionValues(UpgradeController.instance.SelectedTower);
+		}
 	}
 
 	public void IncLives(int l) {

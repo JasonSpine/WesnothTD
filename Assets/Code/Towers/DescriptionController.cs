@@ -29,22 +29,16 @@ public class DescriptionController : MonoBehaviour {
 		switch (VictimType) {
 		case VictimsMainController.VictimEnumID.DRAKE:
 			return "drakes";
-			break;
 		case VictimsMainController.VictimEnumID.LIZARD:
 			return "lizards";
-			break;
 		case VictimsMainController.VictimEnumID.LOYALIST:
 			return "loyalists";
-			break;
 		case VictimsMainController.VictimEnumID.TROLL:
 			return "trolls";
-			break;
 		case VictimsMainController.VictimEnumID.UNDEAD:
 			return "undeads";
-			break;
 		case VictimsMainController.VictimEnumID.WOLF:
 			return "wolf riders";
-			break;
 		}
 
 		return "";

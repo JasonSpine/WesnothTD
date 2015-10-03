@@ -14,11 +14,17 @@ public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 		TowerController _TowerController = TowerPrefab.GetComponent<TowerController> ();
 		Description.SetDescriptionValues (_TowerController);
 		Description.gameObject.SetActive (true);
+		if (UpgradeController.instance.isPermanent()) {
+			UpgradeController.instance.gameObject.SetActive(false);
+		}
 	}
 
 	public void OnPointerExit (PointerEventData eventData) 
 	{
 		Description.gameObject.SetActive (false);
+		if (UpgradeController.instance.isPermanent()) {
+			UpgradeController.instance.gameObject.SetActive(true);
+		}
 	}
 
 	// Use this for initialization
@@ -34,5 +40,6 @@ public class TowerButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 	public void ClickAction() {
 		TowerController _TowerController = TowerPrefab.GetComponent<TowerController>();
 		MouseTowerPlacement.instance.Initialize (_TowerController);
+		UpgradeController.instance.SetPermanent(false);
 	}
 }

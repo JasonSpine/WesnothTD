@@ -84,8 +84,6 @@ public class VictimsMainController : MonoBehaviour {
 	}
 
 	void AddVictim(VictimEnumID VictimID, VictimPath _VictimPath) {
-		GameObject VictimPrefab;
-
 		foreach (GameObject victim in VictimPrefabs) {
 			if (victim.GetComponent<VictimController>().VictimID == VictimID) {
 				GameObject VictimObj = (GameObject)Instantiate(victim);
@@ -361,4 +359,26 @@ public class VictimsMainController : MonoBehaviour {
 		return result;
 	}
 
+	public VictimController GetColosestVictim(Vector2 from) { // for projectiles that lose their target
+		VictimController result = null;
+		float resultDistance = float.MaxValue;
+		
+		foreach (VictimController v in AllVictims) {
+			if (result == null) { // repeat until find tower in range
+				float DistFromTowerToVictim = Vector2.Distance(from, (Vector2)v.transform.position);
+				if (DistFromTowerToVictim < resultDistance) {
+					result = v;
+					resultDistance = DistFromTowerToVictim;
+				}
+			} else { // if any tower in range is found, look for the closest
+				float DistFromTowerToVictim = Vector2.Distance(from, (Vector2)v.transform.position);
+				if (DistFromTowerToVictim < resultDistance) {
+					result = v;
+					resultDistance = DistFromTowerToVictim;
+				}
+			}
+		}
+		
+		return result;
+	}
 }

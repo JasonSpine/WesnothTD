@@ -86,8 +86,12 @@ public class ProjectileController : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update () {
 		if (VictimToAttack == null) {
-			Destroy (gameObject);
-			return;
+			VictimToAttack = VictimsMainController.instance.GetColosestVictim(transform.position);
+			if (VictimToAttack == null) {
+				InstantiateBlastEffect();
+				Destroy (gameObject);
+				return;
+			}
 		}
 
 		//rotation
@@ -135,12 +139,7 @@ public class ProjectileController : MonoBehaviour {
 
 	protected virtual void HitVictimOnCollision(Collider2D other) {
 		if (other.gameObject.GetComponent<VictimController>() == VictimToAttack) {
-			if (BlastEffect != null) {
-				GameObject BE = Instantiate(BlastEffect);
-				
-				BE.transform.SetParent(MapParentHandle.instance.gameObject.transform);
-				BE.transform.position = transform.position;
-			}
+			InstantiateBlastEffect();
 
 			AdjustDamage();
 			SlowVictim();
@@ -149,6 +148,15 @@ public class ProjectileController : MonoBehaviour {
 			VictimToAttack.DecHP(Damage);
 
 			Destroy(gameObject);
+		}
+	}
+
+	protected void InstantiateBlastEffect() {
+		if (BlastEffect != null) {
+			GameObject BE = Instantiate (BlastEffect);
+		
+			BE.transform.SetParent (MapParentHandle.instance.gameObject.transform);
+			BE.transform.position = transform.position;
 		}
 	}
 

@@ -59,8 +59,8 @@
      <Compile Include="Assets\Code\Towers\Projectiles\ProjectileController.cs" />
      <Compile Include="Assets\Code\Towers\TowerButtonController.cs" />
      <Compile Include="Assets\Code\Towers\TowersOnBoard\MouseTowerPlacement.cs" />
-     <Compile Include="Assets\Code\Towers\TowersOnBoard\TowerAI.cs" />
      <Compile Include="Assets\Code\Towers\TowersOnBoard\TowerController.cs" />
+     <Compile Include="Assets\Code\Towers\UpgradeController.cs" />
      <Compile Include="Assets\Code\Victims\PathNode.cs" />
      <Compile Include="Assets\Code\Victims\VictimController.cs" />
      <Compile Include="Assets\Code\Victims\VictimPath.cs" />
