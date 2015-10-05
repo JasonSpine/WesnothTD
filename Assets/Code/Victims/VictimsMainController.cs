@@ -399,11 +399,10 @@ public class VictimsMainController : MonoBehaviour {
 		float resultDistance = float.MaxValue;
 		
 		foreach (VictimController v in AllVictims) {
-			if (v == null) {
-				continue;
-			}
-			if (ExceptVictims.Contains(v)) {
-				continue;
+			if (ExceptVictims != null) {
+				if (ExceptVictims.Contains(v)) {
+					continue;
+				}
 			}
 
 			if (result == null) { // repeat until find tower in range
