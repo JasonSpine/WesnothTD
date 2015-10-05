@@ -86,7 +86,7 @@ public class ProjectileController : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update () {
 		if (VictimToAttack == null) {
-			VictimToAttack = VictimsMainController.instance.GetColosestVictim(transform.position);
+			VictimToAttack = VictimsMainController.instance.GetClosestVictim(transform.position);
 			if (VictimToAttack == null) {
 				InstantiateBlastEffect();
 				Destroy (gameObject);

@@ -394,11 +394,18 @@ public class VictimsMainController : MonoBehaviour {
 		return result;
 	}
 
-	public VictimController GetColosestVictim(Vector2 from) { // for projectiles that lose their target
+	public VictimController GetClosestVictim(Vector2 from, List<VictimController> ExceptVictims = null) { // for projectiles that lose their target
 		VictimController result = null;
 		float resultDistance = float.MaxValue;
 		
 		foreach (VictimController v in AllVictims) {
+			if (v == null) {
+				continue;
+			}
+			if (ExceptVictims.Contains(v)) {
+				continue;
+			}
+
 			if (result == null) { // repeat until find tower in range
 				float DistFromTowerToVictim = Vector2.Distance(from, (Vector2)v.transform.position);
 				if (DistFromTowerToVictim < resultDistance) {

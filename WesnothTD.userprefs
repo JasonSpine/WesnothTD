@@ -2,7 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Victims\VictimsMainController.cs">
     <Files>
-      <File FileName="Assets\Code\Victims\VictimsMainController.cs" Line="383" Column="3" />
+      <File FileName="Assets\Code\Towers\Projectiles\LightBeamProjectile.cs" Line="4" Column="23" />
+      <File FileName="Assets\Code\Victims\VictimsMainController.cs" Line="403" Column="14" />
+      <File FileName="Assets\Code\Towers\Projectiles\LightBeamMultiProjectile.cs" Line="21" Column="5" />
+      <File FileName="Assets\Code\Towers\Projectiles\ProjectileController.cs" Line="64" Column="42" />
+      <File FileName="Assets\Code\Towers\TowersOnBoard\TowerController.cs" Line="162" Column="140" />
+      <File FileName="Assets\Code\Towers\Projectiles\MultiProjectileController.cs" Line="19" Column="4" />
+      <File FileName="Assets\Code\Victims\VictimController.cs" Line="114" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -110,6 +110,9 @@ public class VictimController : MonoBehaviour {
 	}
 
 	public void Poison(float PoisonStrength) {
+		if (VictimID == VictimsMainController.VictimEnumID.UNDEAD) {
+			return;
+		}
 		VictimSprite.color = new Color (0.5f, 1.0f, 0.5f, 1.0f);
 		Poisoned = true;
 
