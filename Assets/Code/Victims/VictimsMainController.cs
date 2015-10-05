@@ -33,7 +33,7 @@ public class VictimsMainController : MonoBehaviour {
 	public int VictimPairsAmountInEachWave;
 	protected int VictimPairsToReleaseInCurrentWave;
 
-	public int WavesCount;
+	public int WavesCount = 50;
 	public VictimEnumID[] WavesPattern;
 
 	[SerializeField]
@@ -47,6 +47,8 @@ public class VictimsMainController : MonoBehaviour {
 	public int VictimsPrize = 5;
 	public int VictimsPrizeIncrease = 1;
 
+	public WaveInfo CurrentWaveInfo, NextWaveInfo;
+
 
 	void Awake() {
 		instance = this;
@@ -54,7 +56,21 @@ public class VictimsMainController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		SetInfoFieldsForWave (NextWaveInfo, 0);
+	}
 
+	public void SetInfoFieldsForWave(WaveInfo waveInfo, int WaveNumber) {
+		if ((WaveNumber >= 0) && (WaveNumber <= WavesCount)) {
+			VictimEnumID vID = WavesPattern [WaveNumber % WavesPattern.Length];
+
+			foreach (GameObject victim in VictimPrefabs) {
+				VictimController vCon = victim.GetComponent<VictimController> ();
+				if (vCon.VictimID == vID) {
+					waveInfo.SetFields (vCon.VictimSprite.sprite, GetVictimsHp(WaveNumber), GetVictimsPrize(WaveNumber), WaveNumber);
+					break;
+				}
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -83,6 +99,18 @@ public class VictimsMainController : MonoBehaviour {
 		}
 	}
 
+	float GetVictimsHp(int WaveNumber) {
+		float HpIncreased = VictimsHp;
+		for (int i = 0; i < WaveNumber; i++) {
+			HpIncreased *= VictimsHpIncreaseMultiplier;
+		}
+		return HpIncreased;
+	}
+
+	int GetVictimsPrize(int WaveNumber) {
+		return VictimsPrize + (VictimsPrizeIncrease * WaveNumber);
+	}
+
 	void AddVictim(VictimEnumID VictimID, VictimPath _VictimPath) {
 		foreach (GameObject victim in VictimPrefabs) {
 			if (victim.GetComponent<VictimController>().VictimID == VictimID) {
@@ -95,7 +123,7 @@ public class VictimsMainController : MonoBehaviour {
 
 				AllVictims.Add(_VictimController);
 
-				_VictimController.Initialize (VictimsHp, VictimsPrize, VictimPairsToReleaseInCurrentWave);
+				_VictimController.Initialize (GetVictimsHp(CurrentWave), GetVictimsPrize(CurrentWave), VictimPairsToReleaseInCurrentWave);
 
 				break;
 			}
@@ -110,6 +138,13 @@ public class VictimsMainController : MonoBehaviour {
 		WaveRelease = true;
 
 		VictimPairsToReleaseInCurrentWave = VictimPairsAmountInEachWave;
+
+		SetInfoFieldsForWave (CurrentWaveInfo, CurrentWave);
+		SetInfoFieldsForWave (NextWaveInfo, CurrentWave + 1);
+
+		if ((CurrentWave + 1) >= WavesCount) {
+			SendWaveButtonReference.gameObject.SetActive(false);
+		}
 	}
 
 	public VictimController GetColosestVictimInRange(Vector2 from, float radius) {

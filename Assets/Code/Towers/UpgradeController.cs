@@ -26,9 +26,9 @@ public class UpgradeController : MonoBehaviour {
 	public void SetDescriptionValues(TowerController _TowerController) {
 		SelectedTower = _TowerController;
 
-		UpgradeRange = _TowerController.TowerRange * 1.2f;
+		UpgradeRange = _TowerController.TowerRange * 1.07f;
 		UpgradeCost = _TowerController.Price / 2;
-		UpgradeDamage = _TowerController.Damage * 1.2f;
+		UpgradeDamage = _TowerController.Damage * 1.5f;
 
 		SellRefound = (int)((float)(((_TowerController.TowerLevel - 1) * UpgradeCost) + // upgrades
 			_TowerController.Price) * 0.75f); // base price
@@ -39,12 +39,12 @@ public class UpgradeController : MonoBehaviour {
 		TowerLevelValueText.text = _TowerController.TowerLevel.ToString ();
 
 		UpgradeDescriptionValuesText.text =
-				  UpgradeDamage.ToString () + "\n"
-				+ UpgradeRange.ToString ();
+				UpgradeDamage.ToString ("F0") + "\n"
+				+ UpgradeRange.ToString ("F0");
 
 		DescriptionValuesText.text =
-				  _TowerController.Damage.ToString () + "\n"
-				+ _TowerController.TowerRange.ToString ();
+				_TowerController.Damage.ToString ("F0") + "\n"
+				+ _TowerController.TowerRange.ToString ("F0");
 
 		TowerUpgradePrice.text = "(price: " + UpgradeCost.ToString () + ")";
 

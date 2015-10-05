@@ -21,7 +21,7 @@ public class DescriptionController : MonoBehaviour {
 
 		DescriptionValuesText.text =
 			"$" + _TowerController.Price.ToString () + "\n"
-				+ _TowerController.Damage.ToString ();
+				+ _TowerController.Damage.ToString ("F0");
 
 	}
 

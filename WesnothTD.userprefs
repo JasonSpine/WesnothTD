@@ -1,19 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Towers\UpgradeController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Victims\VictimsMainController.cs">
     <Files>
-      <File FileName="Assets\Code\Victims\VictimController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Towers\TowersOnBoard\TowerController.cs" Line="126" Column="2" />
-      <File FileName="Assets\Code\Towers\Projectiles\ProjectileController.cs" Line="161" Column="3" />
-      <File FileName="Assets\Code\Victims\VictimsMainController.cs" Line="209" Column="42" />
-      <File FileName="Assets\Code\Towers\TowersOnBoard\TowerAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Towers\TowerButtonController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Towers\DescriptionController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Towers\Projectiles\LightBeamProjectile.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Towers\UpgradeController.cs" Line="142" Column="40" />
-      <File FileName="Assets\Code\Board\TowerField.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Towers\TowersOnBoard\MouseTowerPlacement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Towers\Cash.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Victims\VictimsMainController.cs" Line="383" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

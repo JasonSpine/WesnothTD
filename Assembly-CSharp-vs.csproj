@@ -65,6 +65,7 @@
      <Compile Include="Assets\Code\Victims\VictimController.cs" />
      <Compile Include="Assets\Code\Victims\VictimPath.cs" />
      <Compile Include="Assets\Code\Victims\VictimsMainController.cs" />
+     <Compile Include="Assets\Code\Victims\WaveInfo.cs" />
      <None Include="Assets\Fonts\www.fontsquirrel.com\League-Gothic\SIL Open Font License.txt" />
      <None Include="Assets\Sounds\credits.txt" />
      <None Include="Assets\Fonts\www.1001fonts.com\conformity\Conformity.txt" />
