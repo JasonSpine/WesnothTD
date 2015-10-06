@@ -61,7 +61,7 @@ public class Cash : MonoBehaviour {
 			SetLives (LivesValue - l);
 		} else {
 			SetLives(0);
-			//dead!!!
+			PauseController.LoseGame = true;
 		}
 	}
 

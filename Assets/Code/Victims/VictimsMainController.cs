@@ -76,7 +76,13 @@ public class VictimsMainController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (WaveRelease) {
-			VictimsReleaser();
+			VictimsReleaser ();
+		} else { // check win condition
+			if (CurrentWave + 1 >= WavesCount) {
+				if (AllVictims.Count <= 0) {
+					PauseController.WinGame = true;
+				}
+			}
 		}
 	}
 
