@@ -50,8 +50,10 @@
      <Compile Include="Assets\Code\Board\FieldsMainController.cs" />
      <Compile Include="Assets\Code\Board\MapParentHandle.cs" />
      <Compile Include="Assets\Code\Board\MouseControl.cs" />
+     <Compile Include="Assets\Code\Board\PauseController.cs" />
      <Compile Include="Assets\Code\Board\TowerField.cs" />
      <Compile Include="Assets\Code\Helpers\SoundHelper.cs" />
+     <Compile Include="Assets\Code\MainMenu\MainMenuController.cs" />
      <Compile Include="Assets\Code\Towers\Cash.cs" />
      <Compile Include="Assets\Code\Towers\DescriptionController.cs" />
      <Compile Include="Assets\Code\Towers\Projectiles\BlastEffect.cs" />
